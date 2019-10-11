@@ -1,15 +1,19 @@
 extends KinematicBody
-onready var cam1 = get_node("Camera")
-onready var cam2 = get_node("Camera2")
-onready var cam3 = get_node("Camera3")
+onready var camYZ = get_node("Cam_YZ")
+onready var camXY = get_node("Cam_XY")
+onready var camXZ = get_node("Cam_XZ")
 var currentCam : int = 1
+
+# 1 is cam XY
+# 2 is cam XZ
+# 3 is cam YZ
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	camXY.make_current()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -18,13 +22,17 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("DimensionShift"):
 		currentCam = currentCam + 1
+		print("Current Cam is: " + str(currentCam))
 		match currentCam:
 			2:
-				cam2.make_current()
+				camXZ.make_current()
+				print("dimension XZ")
 			3:
-				cam3.make_current()
+				camYZ.make_current()
+				print("dimension YZ")
 			4:
 				currentCam = 1
-				cam1.make_current()
+				camXY.make_current()
+				print("dimension XY")
 
 
