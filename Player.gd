@@ -4,11 +4,9 @@ onready var camXY = get_node("Cam_XY")
 onready var camXZ = get_node("Cam_XZ")
 var currentCam : int = 1
 
-var x = 1 # these are bools
-var y = 1
+var x = 0 # these are velocity coordinates
+var y = 0
 var z = 0
-
-
 
 # 1 is cam XY
 # 2 is cam XZ
@@ -23,8 +21,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	move_and_collide(Vector3(1,0,0))
-
+	move_and_collide(Vector3(x, z, -y))
+	zero()
+	
+func zero():
+	x = 0
+	y = 0
+	z = 0
+	
 func _input(event):
 	if event.is_action_pressed("DimensionShift"):
 		currentCam = currentCam + 1
@@ -33,24 +37,32 @@ func _input(event):
 			2:
 				camXZ.make_current()
 				print("dimension XZ")
-				x = 1
-				z = 1
-				y = 0
 			3:
 				camYZ.make_current()
 				print("dimension YZ")
-				x = 0
-				y = 1
-				z = 1
+
 			4:
 				currentCam = 1
 				camXY.make_current()
 				print("dimension XY")
-				x = 1
-				y = 1
-				z = 0
-				
-	if event.is_action_pressed("Down"):
-		move_and_collide(Vector3(1,0,0))
-
+	if Input.is_action_pressed("Down"):
+		if camYZ.current or camXZ.current:
+			z = -1
+		else:
+			y = -1
+	if Input.is_action_pressed("Up"):
+		if camYZ.current or camXZ.current:
+			z = 1
+		else:
+			y = 1
+	if Input.is_action_pressed("Left"):
+		if camXZ.current or camXY.current:
+			x = -1
+		else:
+			y = -1
+	if Input.is_action_pressed("Right"):
+		if camXZ.current or camXY.current:
+			x = 1
+		else:
+			y = 1
 
