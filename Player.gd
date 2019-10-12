@@ -22,12 +22,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	move_and_collide(Vector3(x, z, -y))
-	zero()
-	
-func zero():
-	x = 0
-	y = 0
-	z = 0
+	x = x * .5
+	y = y * .5
+	z = z * .5
+
 	
 func _input(event):
 	if event.is_action_pressed("DimensionShift"):
@@ -47,22 +45,22 @@ func _input(event):
 				print("dimension XY")
 	if Input.is_action_pressed("Down"):
 		if camYZ.current or camXZ.current:
-			z = -1
+			z = z-1
 		else:
-			y = -1
+			y = y-1
 	if Input.is_action_pressed("Up"):
 		if camYZ.current or camXZ.current:
-			z = 1
+			z = z+1
 		else:
-			y = 1
+			y = y+1
 	if Input.is_action_pressed("Left"):
 		if camXZ.current or camXY.current:
-			x = -1
+			x = x-1
 		else:
-			y = -1
+			y = y-1
 	if Input.is_action_pressed("Right"):
 		if camXZ.current or camXY.current:
-			x = 1
+			x = x+1
 		else:
-			y = 1
+			y = y+1
 

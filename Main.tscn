@@ -28,3 +28,6 @@ physics_material_override = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="testingLevel/StaticBody"]
 shape = SubResource( 1 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( -0.284113, 0.0157683, -0.958661, -0.75211, -0.623792, 0.212638, -0.594652, 0.781432, 0.189087, 0, 0, 0 )
