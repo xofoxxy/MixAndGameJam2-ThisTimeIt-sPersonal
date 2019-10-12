@@ -20,9 +20,12 @@ shape = SubResource( 1 )
 
 [node name="Cam_XY" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 0, 10, 0 )
+projection = 1
 
 [node name="Cam_XZ" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10 )
+projection = 1
 
 [node name="Cam_YZ" type="Camera" parent="."]
 transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, 10, 1, 0 )
+projection = 1
