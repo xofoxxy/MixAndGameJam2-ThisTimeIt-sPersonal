@@ -16,8 +16,8 @@ func _ready():
 	camXY.make_current()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	move_and_collide(Vector3(1,0,0))
 
 func _input(event):
 	if event.is_action_pressed("DimensionShift"):
