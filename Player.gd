@@ -3,10 +3,18 @@ onready var camYZ = get_node("Cam_YZ")
 onready var camXY = get_node("Cam_XY")
 onready var camXZ = get_node("Cam_XZ")
 var currentCam : int = 1
-
-var x = 0 # these are velocity coordinates
-var y = 0
-var z = 0
+var currentLayout : int = 1
+var dir = Vector3()
+const gravity  = Vector3(0,-.1,0)
+const acc = 4.5
+const deacc = 16
+const maxSlope = 40
+var direction = Vector3()
+var movement = Vector3()
+var velocity = 50
+var maxMovementSpeed = 1
+var acceleration = 1
+var friction = 0
 
 # 1 is cam XY
 # 2 is cam XZ
@@ -17,50 +25,63 @@ var z = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	camXY.make_current()
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	move_and_collide(Vector3(x, z, -y))
-	x = x * .5
-	y = y * .5
-	z = z * .5
-
-	
+	pass
+func _physics_process(delta):
+	movement = movement.normalized()
+	if movement != Vector3(0,0,0):
+		movement = lerp(movement,direction*velocity,acceleration)
+	else:
+		movement = lerp(movement,Vector3(0,0,0),friction)
+	movement.y = movement.y - 20
+	move_and_slide(movement)
+	direction = Vector3(0,0,0)
+	pass
 func _input(event):
 	if event.is_action_pressed("DimensionShift"):
-		currentCam = currentCam + 1
 		print("Current Cam is: " + str(currentCam))
 		match currentCam:
+			1:
+				camXY.make_current()
+				print("dimension XY")
+				currentLayout = 1
 			2:
 				camXZ.make_current()
 				print("dimension XZ")
+				currentLayout = 2
 			3:
 				camYZ.make_current()
 				print("dimension YZ")
-
-			4:
-				currentCam = 1
-				camXY.make_current()
-				print("dimension XY")
-	if Input.is_action_pressed("Down"):
-		if camYZ.current or camXZ.current:
-			z = z-1
-		else:
-			y = y-1
-	if Input.is_action_pressed("Up"):
-		if camYZ.current or camXZ.current:
-			z = z+1
-		else:
-			y = y+1
-	if Input.is_action_pressed("Left"):
-		if camXZ.current or camXY.current:
-			x = x-1
-		else:
-			y = y-1
-	if Input.is_action_pressed("Right"):
-		if camXZ.current or camXY.current:
-			x = x+1
-		else:
-			y = y+1
-
+				currentLayout = 3
+		currentCam = currentCam + 1
+		if currentCam > 3:
+			currentCam = 1
+	match (currentLayout):
+		1:
+			if Input.is_action_pressed("Up"):
+				direction.z -= 1
+			if Input.is_action_pressed("Down"):
+				direction.z += 1
+			if Input.is_action_pressed("Left"):
+				direction.x += -1
+			if Input.is_action_pressed("Right"):
+				direction.x += 1
+		2:
+			if Input.is_action_pressed("Up"):
+				direction.y = 3
+			if Input.is_action_pressed("Left"):
+				direction.x += -1
+			if Input.is_action_pressed("Right"):
+				direction.x += 1
+			pass
+		3:
+			if Input.is_action_pressed("Up"):
+				direction.y += 3
+			if Input.is_action_pressed("Left"):
+				direction.z += 1
+			if Input.is_action_pressed("Right"):
+				direction.z += -1
+			pass

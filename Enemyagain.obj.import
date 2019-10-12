@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Enemyagain.obj-78a935ef5ae27a23541cc48c45a88eb5.mesh"
+
+[deps]
+
+files=[ "res://.import/Enemyagain.obj-78a935ef5ae27a23541cc48c45a88eb5.mesh" ]
+
+source_file="res://Enemyagain.obj"
+dest_files=[ "res://.import/Enemyagain.obj-78a935ef5ae27a23541cc48c45a88eb5.mesh", "res://.import/Enemyagain.obj-78a935ef5ae27a23541cc48c45a88eb5.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

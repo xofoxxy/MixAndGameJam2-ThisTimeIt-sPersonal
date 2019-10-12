@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Button.obj-967c83543912020b44ea8325936ca435.mesh"
+
+[deps]
+
+files=[ "res://.import/Button.obj-967c83543912020b44ea8325936ca435.mesh" ]
+
+source_file="res://Button.obj"
+dest_files=[ "res://.import/Button.obj-967c83543912020b44ea8325936ca435.mesh", "res://.import/Button.obj-967c83543912020b44ea8325936ca435.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true
